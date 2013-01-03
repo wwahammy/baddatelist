@@ -1,14 +1,16 @@
 
+require 'treetop'
+require File.expand_path(File.join(File.dirname(__FILE__), 'parse_types.rb'))
+
 #from https://github.com/aarongough/treetop-sexp-parser under MIT
 class Parser
 
-  require 'treetop'
-  
-  Treetop.load(File.expand_path(File.join(File.dirname(__FILE__), 'smsgrammar')))
+  Treetop.load(File.expand_path(File.join(File.dirname(__FILE__), 'smsgrammar.treetop')))
   @@parser = SMSMessageParser.new
   
   def self.parse(data)
-    tree = @@parser.parse(data)
+  
+    tree = @@parser.parse(data.strip)
     
     if(tree.nil?)
       raise Exception, "Parse error at offset: #{@@parser.index}; reason: #{@@parser.failure_reason}"

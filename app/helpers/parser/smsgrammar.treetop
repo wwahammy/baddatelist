@@ -1,27 +1,28 @@
 grammar SMSMessage
-
+	rule message
+		 report/request/instruction
+	end
 	
-	
-	
+	rule id
+		email / license / phone
+	end
 		
 	rule phone
-		optionalone? (phonedelimiter? [0-9]) 10..10
+		[1]? (phonedelimiter? [0-9]) 10..10 <PhoneNode>
 	end
 	
 	rule email
-		[-+.0-9a-zA-Z]+ '@' [-+.0-9a-zA-Z]+
+		[-+.0-9a-zA-Z]+ '@' [-+.0-9a-zA-Z]+ <EmailNode>
 	end
 	
 	rule license
-		[a-zA-Z]2..2 '*' [-\wa-zA-Z0-9]1..10
+		[a-zA-Z]2..2 '*' [-\wa-zA-Z0-9]1..10 <LicenseNode>
 	end
 	
-	rule message
-		 space? report/request/instruction space?
-	end
+
 	
 	rule request
-		id
+		id <RequestNode>
 	end
 	
 	rule phonedelimiter
@@ -33,7 +34,7 @@ grammar SMSMessage
 	end
 	
 	rule report
-		id space set_of_problems 
+		id space set_of_problems <ReportNode>
 	end
 	
 	rule set_of_problems
@@ -48,7 +49,7 @@ grammar SMSMessage
 		[\s]+
 	end
 	
-	rule id
-		email/license/phone
+	rule instruction
+	   .* <InstructionNode>
 	end
 end
