@@ -1,4 +1,4 @@
-source 'http://mirror1.prod.rhcloud.com/mirror/ruby/'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
 
@@ -36,10 +36,22 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+ gem 'debugger'
 
 # This version needs to be hardcoded for OpenShift compatability
 gem 'thor', '= 0.14.6'
 
 # This needs to be installed so we can run Rails console on OpenShift directly
 gem 'minitest'
+
+gem 'twilio-ruby'
+
+gem 'trails'
+
+gem 'libv8', '~> 3.11.8', :platforms => :ruby
+
+gem "sha3", "~> 0.2.2"
+
+
+gem 'therubyracer', :platforms => :ruby
+

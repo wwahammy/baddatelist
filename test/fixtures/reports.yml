@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+#one:
+#  hash: MyString
+#  violent: false
+#  no_payment: false
+#  persistent_haggler: false
+#  no_show: false
+#  refuses_condom: false
+#  disrespectful: false
+#  police: false
+#  stalker: false
+#  keeps_calling_wontpay: false
+
+#two:
+#  hash: MyString
+#  violent: false
+#  no_payment: false
+#  persistent_haggler: false
+#  no_show: false
+#  refuses_condom: false
+#  disrespectful: false
+#  police: false
+#  stalker: false
+#  keeps_calling_wontpay: false

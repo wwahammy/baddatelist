@@ -1,0 +1,53 @@
+grammar SMSMessage
+
+	
+	
+	
+		
+	rule phone
+		optionalone? (phonedelimiter? [0-9]) 10..10
+	end
+	
+	rule email
+		[-+.0-9a-zA-Z]+ '@' [-+.0-9a-zA-Z]+
+	end
+	
+	rule license
+		[a-zA-Z]2..2 '*' [-\wa-zA-Z0-9]1..10
+	end
+	
+	rule message
+		 space? report/request/instruction space?
+	end
+	
+	rule request
+		id
+	end
+	
+	rule phonedelimiter
+		'.' / '(' / ')' / '\-' / \w
+	
+	rule optionalone
+		'1'
+	end
+	
+	rule report
+		id space set_of_problems 
+	end
+	
+	rule set_of_problems
+		problem (space problem)*
+	end
+	
+	rule problem
+		[a-zA-Z]+
+	end
+	
+    rule space
+		[\s]+
+	end
+	
+	rule id
+		email/license/phone
+	end
+end
