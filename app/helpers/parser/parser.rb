@@ -1,4 +1,4 @@
-require_relative 'parser_error'
+
 #from https://github.com/aarongough/treetop-sexp-parser under MIT
 class Parser
 

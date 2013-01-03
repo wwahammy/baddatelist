@@ -25,7 +25,8 @@ grammar SMSMessage
 	end
 	
 	rule phonedelimiter
-		'.' / '(' / ')' / '\-' / \w
+		[.()\W-]
+	end
 	
 	rule optionalone
 		'1'

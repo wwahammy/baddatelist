@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101192602) do
+ActiveRecord::Schema.define(:version => 20130102044407) do
 
   create_table "reports", :force => true do |t|
     t.string   "hash"
@@ -29,5 +29,11 @@ ActiveRecord::Schema.define(:version => 20130101192602) do
   end
 
   add_index "reports", ["hash"], :name => "index_reports_on_hash"
+
+  create_table "salts", :force => true do |t|
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
