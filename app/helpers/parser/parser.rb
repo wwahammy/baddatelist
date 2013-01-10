@@ -1,7 +1,7 @@
 
 require 'treetop'
 require File.expand_path(File.join(File.dirname(__FILE__), 'parse_types.rb'))
-
+#require File.expand_path(File.join(File.dirname(__FILE__),'grammar.rb'))
 #from https://github.com/aarongough/treetop-sexp-parser under MIT
 class Parser
 
@@ -9,15 +9,16 @@ class Parser
   @@parser = SMSMessageParser.new
   
   def self.parse(data)
-  
-    tree = @@parser.parse(data.strip)
+
+    
+    tree = @@parser.parse(data.strip, :root => :message)
     
     if(tree.nil?)
       raise Exception, "Parse error at offset: #{@@parser.index}; reason: #{@@parser.failure_reason}"
     end
     
     # clean up the tree by removing all nodes of default type 'SyntaxNode'
-    self.clean_tree(tree)
+    #self.clean_tree(tree)
     
     return tree
   end

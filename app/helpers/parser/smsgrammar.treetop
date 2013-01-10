@@ -1,28 +1,62 @@
+
 grammar SMSMessage
+	
 	rule message
-		 report/request/instruction
+		 report
+		 
+		 / request
+		 
+		 / instruction
+		 		 
+		
 	end
 	
 	rule id
-		email / license / phone
+		email
+		/ 
+		license
+		 / 
+		phone
 	end
 		
 	rule phone
-		[1]? (phonedelimiter? [0-9]) 10..10 <PhoneNode>
+		[1]? (phonedelimiter? [0-9]) 10..10
+		{
+			def to_out
+				phone = Phone.new
+				phone.value = text_value
+				phone
+			end
+		}
 	end
 	
 	rule email
-		[-+.0-9a-zA-Z]+ '@' [-+.0-9a-zA-Z]+ <EmailNode>
+		[-+.0-9a-zA-Z]+ '@' [-+.0-9a-zA-Z]+ 
+		{
+			def to_out
+				email = Email.new
+				email.value = text_value
+				email
+			end
+		}
 	end
 	
 	rule license
-		[a-zA-Z]2..2 '*' [-\wa-zA-Z0-9]1..10 <LicenseNode>
+		state:([a-zA-Z]2..2) '*' key:([-\wa-zA-Z0-9]1..10)
+		{
+			def to_out
+				license = License.new
+				license.value = key.text_value
+				license.state = state.text_value
+				license
+			end
+		}
 	end
 	
 
 	
 	rule request
-		id <RequestNode>
+		id
 	end
 	
 	rule phonedelimiter
@@ -34,15 +68,38 @@ grammar SMSMessage
 	end
 	
 	rule report
-		id space set_of_problems <ReportNode>
+		id:id space problems:set_of_problems
+		{
+			def to_out
+				
+				rep = Report.new
+				rep.id = id.to_out
+				rep.problems = problems.to_out
+				rep
+			end
+		}
 	end
 	
 	rule set_of_problems
-		problem (space problem)*
+		fir:problem rest:(space prob:problem)*
+		{
+			def to_out
+				
+				fir.text_value
+				#+ rest.elements.map do |space_and_prob|					
+				#	space_and_prob.prob.text_value
+				#end 
+			end
+		}
 	end
 	
 	rule problem
 		[a-zA-Z]+
+		{
+			def to_out
+				text_value
+			end
+		}
 	end
 	
     rule space
@@ -50,6 +107,11 @@ grammar SMSMessage
 	end
 	
 	rule instruction
-	   .* <InstructionNode>
+	   .*
+	   {
+			def to_out
+					Instruction.new
+			end
+		}
 	end
 end

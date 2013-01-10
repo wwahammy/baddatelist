@@ -1,16 +1,33 @@
 module SMSMessage
-	class EmailNode < Treetop::Runtime::SyntaxNode
-	end
-	class PhoneNode < Treetop::Runtime::SyntaxNode
-	end
-	class LicenseNode < Treetop::Runtime::SyntaxNode
+
+	
+	
+	class Message
+		attr_accessor :child
 	end
 	
-	class RequestNode < Treetop::Runtime::SyntaxNode
-	end
-	class ReportNode < Treetop::Runtime::SyntaxNode
+	
+	
+	class Request
+		attr_accessor :id
 	end
 	
-	class InstructionNode < Treetop::Runtime::SyntaxNode
+	class Report
+		attr_accessor :id, :problems
+	end
+	
+	class Instruction
+	end
+	
+	class Phone
+		attr_accessor :value
+	end
+	
+	class Email
+		attr_accessor :value
+	end
+	
+	class License
+		attr_accessor :state, :value
 	end
 end
